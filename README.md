@@ -17,7 +17,7 @@ If not, create from sample files included in the repo:
 ## Build and run locally
 
 ```bash
-docker compose up --build
+docker compose up website-check --build
 ```
 
 ## Build and push Docker hub
