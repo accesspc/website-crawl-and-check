@@ -1,0 +1,9 @@
+{msg_h1}
+
+Website: {website}
+
+Status: {status}
+
+Response: {response}
+
+Time: {timestamp}

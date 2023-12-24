@@ -1,0 +1,26 @@
+---
+
+email:
+  msg:
+    ok:
+      h1: OK
+      h1_color: green
+      status: up
+    warn:
+      h1: WARNING !!!
+      h1_color: red
+      status: down
+  recipients:
+    - developer@example.com
+  sender: alert@example.com
+  server: 192.168.1.2
+
+websites:
+  - id: example.com
+    crawl: false
+    pages:
+      - /
+      - /blog/
+      - /wp-login.php
+    timeout: 5
+    url: https://example.com

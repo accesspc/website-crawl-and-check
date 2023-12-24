@@ -1,0 +1,13 @@
+---
+extends: default
+
+rules:
+  brackets:
+    max-spaces-inside: 1
+  comments: disable
+  # comments-identation: disable
+  document-start: disable
+  indentation:
+    spaces: consistent
+  line-length: disable
+  new-line-at-end-of-file: disable

@@ -1,0 +1,7 @@
+# Python
+__pycache__
+
+# config
+config.json
+config.yml
+state.json
