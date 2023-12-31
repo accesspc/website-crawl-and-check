@@ -1,0 +1,25 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: app
+  namespace: wcac
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: wcac
+              image: accesspc/website-crawl-and-check:v0.0.1
+              volumeMounts:
+                - name: config
+                  mountPath: /app/config.yml
+                  readOnly: true
+                  subPath: config.yml
+          restartPolicy: OnFailure
+          volumes:
+            - name: config
+              configMap:
+                name: wcac-config
