@@ -1,5 +1,7 @@
 import requests
 
+from datetime import datetime
+
 
 class Service():
 
@@ -30,6 +32,7 @@ class Service():
         check['code'] = response.status_code
         check['size'] = len(response.text)
         check['time'] = response.elapsed.total_seconds()
+        check['timestamp'] = datetime.strftime(datetime.now(), '%c')
 
         if response.status_code == self.request_status_code:
             check['status'] = 'ok'

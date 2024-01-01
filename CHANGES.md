@@ -9,6 +9,18 @@
 
 ## History
 
+### v0.0.3
+
+Fix:
+
+* Status output to include request timestamp
+
+### v0.0.2
+
+Update:
+
+* Move config.yml and state.json to separate folders for better mounting options
+
 ### v0.0.1
 
 Init:
