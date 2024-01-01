@@ -6,8 +6,15 @@
 * feat: crawl website for pages
 * feat: collect page metrics and display generate report(s)
 * feat: run SAST scanner
+* fix: secure nfs volume
 
 ## History
+
+### v1.0.0
+
+Release:
+
+* App working on local machine using `docker compose` and in K8s
 
 ### v0.0.3
 
