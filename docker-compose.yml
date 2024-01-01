@@ -5,5 +5,5 @@ services:
   website-check:
     build: .
     volumes:
-      - ./config.yml:/app/config.yml:ro
-      - ./state.json:/app/state.json
+      - ./config:/app/config:ro
+      - ./state:/app/state

@@ -4,7 +4,7 @@ import os
 
 class State():
     states = {}
-    stf = 'state.json'
+    stf = 'state/state.json'
 
     def __init__(self):
         if not os.path.isfile(self.stf):

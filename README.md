@@ -6,13 +6,13 @@ A website crawl and check is a little app that crawls the website for internal l
 
 Before running locally, make sure these files exist:
 
-* config.yml
-* state.json
+* config/config.yml
+* state/state.json
 
 If not, create from sample files included in the repo:
 
-* config.sample.yml
-* state.sample.json
+* config/config.sample.yml
+* state/state.sample.json
 
 ## Build and run locally
 
