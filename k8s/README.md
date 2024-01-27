@@ -20,11 +20,11 @@ kubectl create namespace wcac
 
 ```bash
 # Create
-kubectl -n wcac create configmap wcac-config --from-file=config.yml
+kubectl -n wcac create configmap wcac-config --from-file=config/config.yml
 
 # Verify
-kubectl -n wcac get configmap wcc-config
-kubectl -n wcac describe configmap wcc-config
+kubectl -n wcac get configmap wcac-config
+kubectl -n wcac describe configmap wcac-config
 ```
 
 ## PersistantVolume
@@ -34,8 +34,8 @@ kubectl -n wcac describe configmap wcc-config
 kubectl apply -f k8s/pv.yml
 
 # Verify
-kubectl get pv bl1-nfs-vol
-kubectl describe pv bl1-nfs-vol
+kubectl get pv nfs-pv
+kubectl describe pv nfs-pv
 ```
 
 ## PersistantVolumeClaim
