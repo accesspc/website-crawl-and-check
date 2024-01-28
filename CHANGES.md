@@ -7,8 +7,16 @@
 * feat: collect page metrics and display generate report(s)
 * feat: run SAST scanner
 * fix: secure nfs volume
+* feat: /metrics service
 
 ## History
+
+### v1.0.1
+
+Fix:
+
+* NFS mount point
+* Cleaned up naming
 
 ### v1.0.0
 

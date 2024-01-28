@@ -26,4 +26,4 @@ spec:
                 name: wcac-config
             - name: state
               persistentVolumeClaim:
-                claimName: nfs-pvc
+                claimName: wcac-pvc

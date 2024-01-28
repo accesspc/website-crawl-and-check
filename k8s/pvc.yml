@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-pvc
+  name: wcac-pvc
   namespace: wcac
 spec:
   accessModes:

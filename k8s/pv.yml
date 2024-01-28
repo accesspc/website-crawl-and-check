@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfs-pv
+  name: wcac-pv
 spec:
   accessModes:
     - ReadWriteMany
@@ -12,7 +12,7 @@ spec:
     - hard
     - nfsvers=4.1
   nfs:
-    path: /data/nfs/k8s
+    path: /data/wcac
     server: 192.168.68.2
   persistentVolumeReclaimPolicy: Delete
   storageClassName: slow
