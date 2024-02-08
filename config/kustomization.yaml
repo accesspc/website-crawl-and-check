@@ -1,0 +1,10 @@
+---
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    name: wcac-config
+configMapGenerator:
+  - name: wcac-config
+    namespace: wcac
+    files:
+      - config.yml

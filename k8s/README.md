@@ -13,52 +13,16 @@ apt install nfs-common -y
 ## Namespace
 
 ```bash
-kubectl create namespace wcac
+kubectl apply -f k8s/namespace.yml
 ```
 
-## ConfigMap
+## App
 
 ```bash
-# Create
-kubectl -n wcac create configmap wcac-config --from-file=config/config.yml
+# ConfigMap: preview
+kubectl kustomize config/
 
-# Verify
-kubectl -n wcac get configmap wcac-config
-kubectl -n wcac describe configmap wcac-config
-```
-
-## PersistantVolume
-
-```bash
-# Create
-kubectl apply -f k8s/pv.yml
-
-# Verify
-kubectl get pv nfs-pv
-kubectl describe pv nfs-pv
-```
-
-## PersistantVolumeClaim
-
-```bash
-# Create
-kubectl apply -f k8s/pvc.yml
-
-# Verify
-kubectl -n wcac get pvc nfs-pvc
-kubectl -n wcac describe pvc nfs-pvc
-```
-
-## CronJob
-
-```bash
-# Create / update
-kubectl apply -f k8s/cronjob.yml
-
-# Verify
-kubectl -n wcac get cronjobs
-kubectl -n wcac get pods
-
-# Logs (dirty way)
-kubectl -n wcac logs $(kubectl -n wcac get pods | tail -1 | cut -d' ' -f1)
+# Apply
+kubectl apply -k config/
+kubectl apply -f k8s/
 ```
