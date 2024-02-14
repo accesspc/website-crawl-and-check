@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{printf "%s-%s" .Release.Name "pvc" | quote}}
+  namespace: {{.Release.Namespace | quote}}
+spec:
+  accessModes:
+    {{- toYaml .Values.persistentvolume.accessmodes | nindent 4}}
+  resources:
+    requests:
+      storage: {{.Values.persistentvolume.storage | quote}}
+  storageClassName: {{.Values.persistentvolume.storageClassName | quote}}
+  volumeMode: Filesystem

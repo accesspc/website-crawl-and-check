@@ -1,0 +1,11 @@
+# Website Crawl and Check
+
+Thank you for installing {{.Chart.Name}} v{{.Chart.Version}}.
+
+Your release name is: {{.Release.Name}}.
+
+To learn more about the release, try:
+
+  $ helm status --namespace {{.Release.Namespace}} {{.Release.Name}}
+  $ helm get all --namespace {{.Release.Namespace}} {{.Release.Name}}
+

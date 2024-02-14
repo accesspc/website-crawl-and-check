@@ -1,0 +1,33 @@
+---
+# Default values for website-crawl-and-check.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+config:
+  email:
+    recipients:
+      - admin@example.com
+    sender: app@example.com
+    server:
+      host: 192.168.1.2
+      port: 25
+
+  websites:
+    - id: example.com
+      crawl: false
+      pages:
+        - /
+      timeout: 5
+      url: https://example.com
+
+cron:
+  schedule: "*/5 * * * *"
+
+persistentvolume:
+  accessmodes:
+    - ReadWriteMany
+  nfs:
+    path: /data/wcac
+    server: 192.168.1.2
+  storage: 100Mi
+  storageClassName: nfs
