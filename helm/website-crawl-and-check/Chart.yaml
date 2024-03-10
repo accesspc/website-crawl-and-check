@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
 name: website-crawl-and-check
-version: 1.0.0
+version: 1.0.1
 description: A Helm chart for Kubernetes
 type: application
 

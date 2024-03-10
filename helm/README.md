@@ -20,6 +20,16 @@ helm install \
   website-crawl-and-check
 ```
 
+### Upgrade
+
+```bash
+helm upgrade \
+  -f values.yml \
+  --namespace wcac \
+  app \
+  website-crawl-and-check
+```
+
 ## Uninstall
 
 ```bash
