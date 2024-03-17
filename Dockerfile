@@ -7,4 +7,6 @@ COPY app /app
 
 WORKDIR /app
 
-ENTRYPOINT [ "python3", "-u", "main.py" ]
+EXPOSE 8000
+
+ENTRYPOINT [ "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=8000" ]
