@@ -21,7 +21,7 @@ config:
       url: https://example.com
 
 cron:
-  schedule: "*/5 * * * *"
+  seconds: 15
 
 persistentvolume:
   accessmodes:
@@ -31,3 +31,7 @@ persistentvolume:
     server: 192.168.1.2
   storage: 100Mi
   storageClassName: nfs
+
+service:
+  containerPort: 8000
+  nodePort: 30800
