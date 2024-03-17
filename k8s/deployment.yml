@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wcac
+  namespace: wcac
+  labels:
+    app: wcac
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wcac
+  template:
+    metadata:
+      labels:
+        app: wcac
+    spec:
+      containers:
+        - name: wcac
+          image: accesspc/website-crawl-and-check:v2.0.0
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 15
+            successThreshold: 1
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            timeoutSeconds: 2
+          resources:
+            requests:
+              cpu: 20m
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+              readOnly: true
+            - name: state
+              mountPath: /app/state
+      volumes:
+        - name: config
+          configMap:
+            name: wcac-config
+        - name: state
+          persistentVolumeClaim:
+            claimName: wcac-pvc

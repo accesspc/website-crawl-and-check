@@ -7,9 +7,14 @@
 * feat: collect page metrics and display generate report(s)
 * feat: run SAST scanner
 * fix: secure nfs volume
-* feat: /metrics service
 
 ## History
+
+### v2.0.0
+
+* Refactored from CronJob to a Flask app with APScheduler inside
+* Metrics printed out on /metrics
+* Updated Helm chart
 
 ### v1.0.1
 

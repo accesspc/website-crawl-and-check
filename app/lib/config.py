@@ -8,5 +8,6 @@ class Config():
 
         with open(cfg, 'r') as cf:
             config = yaml.safe_load(cf)
+            self.cron = config['cron']
             self.email = config['email']
             self.websites = config['websites']

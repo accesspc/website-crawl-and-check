@@ -1,5 +1,8 @@
 ---
 
+cron:
+  seconds: 15
+
 email:
   msg:
     ok:

@@ -1,0 +1,62 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{.Release.Name | quote}}
+  namespace: {{.Release.Namespace | quote}}
+  labels:
+    app: {{.Release.Name | quote}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{.Release.Name | quote}}
+  template:
+    metadata:
+      labels:
+        app: {{.Release.Name | quote}}
+    spec:
+      containers:
+        - name: {{.Release.Name | quote}}
+          image: accesspc/website-crawl-and-check:v{{.Chart.Version}}
+          ports:
+            - containerPort: {{.Values.service.containerPort}}
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: {{.Values.service.containerPort}}
+              scheme: HTTP
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 2
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 15
+            successThreshold: 1
+            httpGet:
+              path: /
+              port: {{.Values.service.containerPort}}
+              scheme: HTTP
+            timeoutSeconds: 2
+          resources:
+            requests:
+              cpu: 20m
+              memory: 100Mi
+            limits:
+              memory: 100Mi
+          volumeMounts:
+            - name: config
+              mountPath: /app/config
+              readOnly: true
+            - name: state
+              mountPath: /app/state
+      volumes:
+        - name: config
+          configMap:
+            name: {{.Release.Name | quote}}
+        - name: state
+          persistentVolumeClaim:
+            claimName: {{printf "%s-%s" .Release.Name "pvc" | quote}}
