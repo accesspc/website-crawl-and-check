@@ -9,21 +9,10 @@ A few notes:
 
 Before deploying, you need to create a configuration / values.yaml file, that will be used to deploy the app.
 
-## Install
+### Install / Upgrade
 
 ```bash
-helm install \
-  -f values.yml \
-  --create-namespace \
-  --namespace wcac \
-  app \
-  website-crawl-and-check
-```
-
-### Upgrade
-
-```bash
-helm upgrade \
+helm upgrade --install \
   -f values.yml \
   --namespace wcac \
   app \
