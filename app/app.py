@@ -68,9 +68,9 @@ def cron_job():
         if 'crawl' in web.keys() and web['crawl']:
             log.warn('Crawl is not implemented yet')
 
-        if 'pages' in web.keys():
-            for page in web['pages']:
-                service.path = page
+        if 'paths' in web.keys():
+            for path in web['paths']:
+                service.path = path
 
                 service.check()
 
