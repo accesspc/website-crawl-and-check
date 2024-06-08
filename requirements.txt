@@ -2,3 +2,4 @@ flask
 flask-apscheduler
 pyyaml
 requests
+waitress
