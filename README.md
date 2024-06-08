@@ -14,6 +14,31 @@ If not, create from sample files included in the repo:
 * config/config.sample.yml
 * state/state.sample.json
 
+## Dev and run locally using virtual environment
+
+```bash
+# Setup
+python3 -m venv .venv
+
+# Activate
+. .venv/bin/activate
+
+# Install pip requirements
+pip3 install -r requirements.txt
+
+# Copy `config` and `state` to app dir
+mkdir -p app/{config,state}
+cp -fv config/config.yml app/config/
+cp -fv state/state.json app/state/
+
+# Run
+cd app
+python3 app.py
+
+# Deactivate
+deactivate
+```
+
 ## Build and run locally
 
 ```bash
