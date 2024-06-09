@@ -9,7 +9,25 @@ A few notes:
 
 Before deploying, you need to create a configuration / values.yaml file, that will be used to deploy the app.
 
-### Install / Upgrade
+## Linting
+
+```bash
+helm lint website-crawl-and-check
+```
+
+## Template debug
+
+```bash
+helm template wcac website-crawl-and-check -f values.yml --debug
+```
+
+## Package
+
+```bash
+helm package website-crawl-and-check
+```
+
+## Install / Upgrade
 
 ```bash
 helm upgrade --install \

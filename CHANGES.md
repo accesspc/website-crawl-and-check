@@ -10,6 +10,13 @@
 
 ## History
 
+### v3.0.0
+
+* Refactored logging
+* Refactored state, removed persistent storage requirement
+* Created metrics exporter for Prometheus
+* Cleaned up Helm chart
+
 ### v2.0.0
 
 * Refactored from CronJob to a Flask app with APScheduler inside

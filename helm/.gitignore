@@ -1,3 +1,6 @@
-/values.yaml
+# Chart dependencies
+**/charts/
+*.tgz
+
+# Helm values overrides
 /values.yml
-/*.tgz

@@ -1,12 +1,19 @@
 FROM python:slim
+LABEL Robertas Reiciunas
+EXPOSE 8000
+HEALTHCHECK --interval=5s --timeout=5s CMD ["curl", "-f", "http://localhost:8000", "||", "exit", "1"]
+
+RUN apt-get update \
+  && apt-get -y install curl \
+  && apt-get clean \
+  && apt-get purge
 
 COPY requirements.txt /requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
 COPY app /app
 
+USER 33
 WORKDIR /app
 
-EXPOSE 8000
-
-ENTRYPOINT [ "python3", "-m", "flask", "run", "--host=0.0.0.0", "--port=8000" ]
+ENTRYPOINT [ "python3", "app.py" ]

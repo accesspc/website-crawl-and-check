@@ -1,7 +1,7 @@
 ---
 apiVersion: v2
 name: website-crawl-and-check
-version: 2.0.0
+version: 3.0.0
 description: A Helm chart for Kubernetes
 type: application
 
@@ -23,4 +23,4 @@ maintainers:
     url: https://reiciunas.dev
 
 icon: https://raw.githubusercontent.com/accesspc/website-crawl-and-check/main/icon.svg
-appVersion: "2.0.0"
+appVersion: "3.0.0"

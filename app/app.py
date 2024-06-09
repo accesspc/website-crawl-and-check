@@ -1,9 +1,30 @@
-from flask import Flask
+import logging
+import os
+import sys
+
+from flask import Flask, render_template
 from flask_apscheduler import APScheduler
+from waitress import serve
 
 from lib.config import Config
+from lib.jsonformatter import JsonFormatter
 from lib.service import Service
 from lib.state import State
+
+version = 'v3.0.0'
+
+# Logger
+log = logging.getLogger()
+log.setLevel(logging.INFO)
+sh = logging.StreamHandler(sys.stdout)
+sh.setFormatter(JsonFormatter({
+    '@timestamp': 'asctime',
+    'level': 'levelname',
+    'logger': 'name',
+    'message': 'message',
+}))
+sh.setLevel(logging.INFO)
+log.addHandler(sh)
 
 # Init Config
 config = Config()
@@ -23,11 +44,11 @@ scheduler.start()
 # Define routes
 @app.route('/')
 def route_home():
-    return '<h1>Website crawl and check</h1>'
+    return render_template('index.html', version=version)
 
 @app.route('/metrics')
 def route_metrics():
-    return state.states
+    return '\n'.join(state.getMetrics()), 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 # Define scheduler job
 @scheduler.task(
@@ -39,27 +60,28 @@ def cron_job():
 
     # Loop config.websites
     for web in config.websites:
-        service = Service(web)
+        # Init crawl
+        service = Service()
+        service.id = web['id']
+        service.proto = web['proto']
 
-        if 'crawl' in web.keys():
-            if web['crawl']:
-                print('Crawl is not implemented yet')
-            else:
-                print('Crawl is disabled, will check for pages')
-        
-        if 'pages' in web.keys():
-            for page in web['pages']:
-                url = ''.join([web['url'], page])
+        if 'timeout' in web.keys():
+            service.timeout = web['timeout']
 
-                check = service.check(url)
-                print(check)
+        if 'crawl' in web.keys() and web['crawl']:
+            log.warn('Crawl is not implemented yet')
 
-                if url not in state.states:
-                    check['status'] = 'init'
-                
-                state.states[url] = check['status']
+        if 'paths' in web.keys():
+            for path in web['paths']:
+                service.path = path
 
-    state.save()
+                service.check()
+
+                u, s = service.getState()
+                state.setState(u, s)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    if 'APP_DEBUG' in os.environ:
+        app.run(debug=os.environ['APP_DEBUG'], host='127.0.0.1', port=8000)
+    else:
+        serve(app, host="0.0.0.0", port=8000)

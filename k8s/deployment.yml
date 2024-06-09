@@ -16,9 +16,21 @@ spec:
       labels:
         app: wcac
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: wcac
-          image: accesspc/website-crawl-and-check:v2.0.0
+          image: accesspc/website-crawl-and-check:v3.0.0
+          imagePullPolicy: Always
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 5
+            periodSeconds: 15
+            successThreshold: 1
+            httpGet:
+              path: /
+              port: 8000
+              scheme: HTTP
+            timeoutSeconds: 2
           ports:
             - containerPort: 8000
           readinessProbe:
@@ -31,32 +43,28 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 2
-          livenessProbe:
-            failureThreshold: 3
-            initialDelaySeconds: 5
-            periodSeconds: 15
-            successThreshold: 1
-            httpGet:
-              path: /
-              port: 8000
-              scheme: HTTP
-            timeoutSeconds: 2
           resources:
             requests:
               cpu: 20m
               memory: 100Mi
             limits:
+              cpu: 1
               memory: 100Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
           volumeMounts:
             - name: config
               mountPath: /app/config
               readOnly: true
-            - name: state
-              mountPath: /app/state
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
       volumes:
         - name: config
           configMap:
             name: wcac-config
-        - name: state
-          persistentVolumeClaim:
-            claimName: wcac-pvc

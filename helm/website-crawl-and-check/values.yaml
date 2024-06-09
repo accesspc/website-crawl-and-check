@@ -15,22 +15,13 @@ config:
   websites:
     - id: example.com
       crawl: false
-      pages:
+      paths:
         - /
+      proto: https
       timeout: 5
-      url: https://example.com
 
 cron:
   seconds: 15
-
-persistentvolume:
-  accessmodes:
-    - ReadWriteMany
-  nfs:
-    path: /data/wcac
-    server: 192.168.1.2
-  storage: 100Mi
-  storageClassName: nfs
 
 service:
   containerPort: 8000
