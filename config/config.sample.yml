@@ -21,9 +21,9 @@ email:
 websites:
   - id: example.com
     crawl: false
-    pages:
+    paths:
       - /
       - /blog/
       - /wp-login.php
+    proto: https
     timeout: 5
-    url: https://example.com

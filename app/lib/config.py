@@ -8,6 +8,7 @@ class Config():
 
     # Init - read config file
     def __init__(self) -> None:
+
         cfg = 'config/config.yml'
 
         try:

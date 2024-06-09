@@ -1,7 +1,8 @@
 import logging
+import os
 import sys
 
-from flask import Flask
+from flask import Flask, render_template
 from flask_apscheduler import APScheduler
 from waitress import serve
 
@@ -10,6 +11,7 @@ from lib.jsonformatter import JsonFormatter
 from lib.service import Service
 from lib.state import State
 
+version = 'v3.0.0'
 
 # Logger
 log = logging.getLogger()
@@ -42,11 +44,11 @@ scheduler.start()
 # Define routes
 @app.route('/')
 def route_home():
-    return '<h1>Website crawl and check</h1>'
+    return render_template('index.html', version=version)
 
 @app.route('/metrics')
 def route_metrics():
-    return state.states
+    return '\n'.join(state.getMetrics()), 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 # Define scheduler job
 @scheduler.task(
@@ -60,7 +62,8 @@ def cron_job():
     for web in config.websites:
         # Init crawl
         service = Service()
-        service.base = web['url']
+        service.id = web['id']
+        service.proto = web['proto']
 
         if 'timeout' in web.keys():
             service.timeout = web['timeout']
@@ -74,9 +77,11 @@ def cron_job():
 
                 service.check()
 
-        state.update(web['url'], service.getStates())
-
-        state.save()
+                u, s = service.getState()
+                state.setState(u, s)
 
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8000)
+    if 'APP_DEBUG' in os.environ and os.environ['APP_DEBUG'] == 'TRUE':
+        app.run(debug=True, host='0.0.0.0', port=8000)
+    else:
+        serve(app, host="0.0.0.0", port=8000)

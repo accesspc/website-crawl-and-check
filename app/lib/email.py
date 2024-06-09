@@ -9,6 +9,7 @@ log = logging.getLogger('email')
 class Email():
 
     def __init__(self, config) -> None:
+
         self.sender = config['sender']
         self.recipients = ', '.join(config['recipients'])
         self.server = config['server']
@@ -16,6 +17,7 @@ class Email():
         self.msgs = config['msg']
 
     def __send(self, web) -> str:
+
         msg = MIMEMultipart('alternative')
         msg['Subject'] = '{} is {}!'.format(
             web['website'],
@@ -64,11 +66,13 @@ class Email():
         return 'Message sent'
 
     def sendOk(self, web) -> str:
+
         self.msg = self.msgs['ok']
 
         return self.__send(web)
 
     def sendWarn(self, web) -> str:
+
         self.msg = self.msgs['warn']
 
         return self.__send(web)

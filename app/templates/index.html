@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block h1 %}Website Crawl and Check{% endblock %}
+
+{% block content %}
+<h2>Prometheus Exporter</h2>
+<div>Version: {{ version }}</div>
+<div>
+  <ul>
+    <li><a href="/metrics">Metrics</a></li>
+  </ul>
+</div>
+{% endblock %}

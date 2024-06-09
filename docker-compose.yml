@@ -4,4 +4,3 @@ services:
     build: .
     volumes:
       - ./config:/app/config:ro
-      - ./state:/app/state

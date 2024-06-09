@@ -1,41 +1,32 @@
 import logging
 import requests
 
-from datetime import datetime
-
 log = logging.getLogger('crawl')
 
 class Service():
 
-    states = {}
+    state = {}
 
     # Init
     def __init__(self) -> None:
-        self._base = ''
+
         self._expected_code = 200
         self._headers = {}
+        self._id = ''
         self._path = ''
+        self._proto = 'https'
         self._proxies = {}
         self._timeout = 5
         self._url = ''
 
         self.session = requests.Session()
-    
+
     # Attributes
-    ## Base
-    @property
-    def base(self):
-        return self._base
-    
-    @base.setter
-    def base(self, value):
-        self._base = value
-    
     ## Expected code
     @property
     def expected_code(self):
         return self._expected_code
-    
+
     @expected_code.setter
     def expected_code(self, value):
         if isinstance(value, int) and value >= 100 and value <= 599:
@@ -47,82 +38,104 @@ class Service():
     @property
     def headers(self):
         return self._headers
-    
+
     @headers.setter
     def headers(self, value):
-        self._headers = value
-    
+        if isinstance(value, dict):
+            self._headers = value
+        else:
+            log.error(f'headers must be a dict of key: value pairs')
+
+    ## ID
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        self._id = value
+
     ## Path
     @property
     def path(self):
         return self._path
-    
+
     @path.setter
     def path(self, value):
         self._path = value
-    
+        self._url = f'{self._proto}://{self._id}{self._path}'
+
+    ## Proto
+    @property
+    def proto(self):
+        return self._proto
+
+    @proto.setter
+    def proto(self, value):
+        if value in ('http', 'https'):
+            self._proto = value
+        else:
+            log.error(f'proto must be either http or https')
+
     ## Proxies
     @property
     def proxies(self):
         return self._proxies
-    
+
     @proxies.setter
     def proxies(self, value):
-        self._proxies = value
-    
+        if isinstance(value, dict):
+            self._proxies = value
+        else:
+            log.error(f'proxies must be a dict of key: value pairs')
+
     ## Timeout
     @property
     def timeout(self):
         return self._timeout
-    
+
     @timeout.setter
     def timeout(self, value):
         if isinstance(value, (int, float)) and value > 0 and value <= 60:
             self._timeout = value
         else:
             log.error(f'timeout value must be float between 0 and 60')
-    
+
     ## URL
     @property
     def url(self):
         return self._url
-    
+
     @url.setter
     def url(self, value):
         self._url = value
-    
+
     # Check page
     def check(self) -> None:
 
-        self._url = ''.join([
-            self._base,
-            self._path
-        ])
-
+        # Perform get request
         response = self.requestGet()
 
-        state = {
+        # Build a state dict
+        self.state = {
+            'proto': self._proto,
+            'id': self._id,
+            'path': self._path,
             'code': response.status_code,
             'size': len(response.text),
             'time': response.elapsed.total_seconds(),
         }
 
-        self.states[self._path] = state
-
-        log.info({
-            'url': self._base,
-            'path': self._path,
-            'state': state,
-        })
+        log.info(self.state)
 
     # get states
-    def getStates(self) -> dict:
-        return self.states
+    def getState(self) -> dict:
+        return self._url, self.state
 
     # requests.get
     def requestGet(self) -> object:
-        try:
 
+        try:
             request = self.session.get(
                 self.url,
                 headers=self._headers,
@@ -150,8 +163,8 @@ class Service():
 
     # requests.post
     def requestPost(self, data={}, json={}) -> object:
-        try:
 
+        try:
             request = self.session.post(
                 self.url,
                 data=data,
