@@ -17,8 +17,8 @@ config:
       crawl: false
       paths:
         - /
+      proto: https
       timeout: 5
-      url: https://example.com
 
 cron:
   seconds: 15
