@@ -2,44 +2,41 @@
 
 A website crawl and check is a little app that crawls the website for internal links and then keeps a status track of them
 
-## Config and State files
+## Config file
 
-Before running locally, make sure these files exist:
+Before running locally, make sure config file exist:
 
 * config/config.yml
-* state/state.json
 
-If not, create from sample files included in the repo:
+If not, create from sample file included in the repo:
 
 * config/config.sample.yml
-* state/state.sample.json
 
-## Dev and run locally using virtual environment
+## Develop and run locally using virtual environment
 
 ```bash
 # Setup
-python3 -m venv .venv
+python3 -m venv .pyenv
 
 # Activate
-. .venv/bin/activate
+. .pyenv/bin/activate
 
 # Install pip requirements
 pip3 install -r requirements.txt
 
-# Copy `config` and `state` to app dir
-mkdir -p app/{config,state}
+# Copy `config` to app dir
+mkdir -p app/{config}
 cp -fv config/config.yml app/config/
-cp -fv state/state.json app/state/
 
 # Run
 cd app
-python3 app.py
+APP_DEBUG=TRUE python3 app.py
 
 # Deactivate
 deactivate
 ```
 
-## Build and run locally
+## Build and run locally on docker
 
 ```bash
 docker compose up website-check --build
