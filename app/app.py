@@ -81,7 +81,7 @@ def cron_job():
                 state.setState(u, s)
 
 if __name__ == "__main__":
-    if 'APP_DEBUG' in os.environ and os.environ['APP_DEBUG'] == 'TRUE':
-        app.run(debug=True, host='0.0.0.0', port=8000)
+    if 'APP_DEBUG' in os.environ:
+        app.run(debug=os.environ['APP_DEBUG'], host='127.0.0.1', port=8000)
     else:
         serve(app, host="0.0.0.0", port=8000)

@@ -1,6 +1,48 @@
 ---
 services:
+  checkov:
+    image: bridgecrew/checkov
+    command: ["-d", "/src", "--quiet"]
+    cap_drop:
+      - NET_RAW
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    security_opt:
+      - label:disable
+      - no-new-privileges:true
+    volumes:
+      - $PWD:/src
+
+  semgrep:
+    image: returntocorp/semgrep
+    command: ["semgrep", "scan", "."]
+    cap_drop:
+      - NET_RAW
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    security_opt:
+      - label:disable
+      - no-new-privileges:true
+    volumes:
+      - $PWD:/src
+
   website-check:
     build: .
+    cap_drop:
+      - NET_RAW
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    security_opt:
+      - label:disable
+      - no-new-privileges:true
     volumes:
       - ./config:/app/config:ro

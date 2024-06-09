@@ -2,6 +2,36 @@
 
 A website crawl and check is a little app that crawls the website for internal links and then keeps a status track of them
 
+## Security Testing
+
+There are multiple tools that can be used for security testing. Here's a few and how to run them:
+
+* semgrep
+
+```bash
+docker run --rm -v $PWD:/src returntocorp/semgrep semgrep scan .
+# or
+docker compose up semgrep
+```
+
+* checkov
+
+```bash
+docker run --rm -v $PWD:/src bridgecrew/checkov -d /src --quiet
+# or
+docker compose up checkov
+```
+
+* trivy
+
+```bash
+# config
+docker run --rm -v $PWD:/src aquasec/trivy config /src
+
+# filesystem
+docker run --rm -v $PWD:/src aquasec/trivy filesystem /src
+```
+
 ## Config file
 
 Before running locally, make sure config file exist:
@@ -53,6 +83,5 @@ docker login [registry-1.docker.io]
 Build and push to Docker hub:
 
 ```bash
-docker build -t accesspc/website-crawl-and-check:v1.0.0 .
-docker push accesspc/website-crawl-and-check:v1.0.0
+docker buildx build --push -t accesspc/website-crawl-and-check:v3.0.0 .
 ```
