@@ -51,12 +51,7 @@ spec:
             - name: config
               mountPath: /app/config
               readOnly: true
-            - name: state
-              mountPath: /app/state
       volumes:
         - name: config
           configMap:
             name: wcac-config
-        - name: state
-          persistentVolumeClaim:
-            claimName: wcac-pvc

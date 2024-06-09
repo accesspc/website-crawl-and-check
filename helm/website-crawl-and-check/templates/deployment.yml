@@ -51,12 +51,7 @@ spec:
             - name: config
               mountPath: /app/config
               readOnly: true
-            - name: state
-              mountPath: /app/state
       volumes:
         - name: config
           configMap:
             name: {{.Release.Name | quote}}
-        - name: state
-          persistentVolumeClaim:
-            claimName: {{printf "%s-%s" .Release.Name "pvc" | quote}}
