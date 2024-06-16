@@ -1,5 +1,21 @@
 ---
 services:
+  bandit:
+    image: ghcr.io/pycqa/bandit/bandit
+    command: ["-r", "/src"]
+    cap_drop:
+      - NET_RAW
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    security_opt:
+      - label:disable
+      - no-new-privileges:true
+    volumes:
+      - $PWD:/src
+
   checkov:
     image: bridgecrew/checkov
     command: ["-d", "/src", "--quiet"]
@@ -19,6 +35,38 @@ services:
   semgrep:
     image: returntocorp/semgrep
     command: ["semgrep", "scan", "."]
+    cap_drop:
+      - NET_RAW
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    security_opt:
+      - label:disable
+      - no-new-privileges:true
+    volumes:
+      - $PWD:/src
+
+  trivy-config:
+    image: aquasec/trivy
+    command: ["config", "/src"]
+    cap_drop:
+      - NET_RAW
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 512M
+    security_opt:
+      - label:disable
+      - no-new-privileges:true
+    volumes:
+      - $PWD:/src
+
+  trivy-filesystem:
+    image: aquasec/trivy
+    command: ["filesystem", "/src"]
     cap_drop:
       - NET_RAW
     deploy:
