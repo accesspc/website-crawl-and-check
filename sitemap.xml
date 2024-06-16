@@ -6,22 +6,37 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://accesspc.github.io/website-crawl-and-check/development/</loc>
-         <lastmod>2024-06-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://accesspc.github.io/website-crawl-and-check/helm/</loc>
-         <lastmod>2024-06-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://accesspc.github.io/website-crawl-and-check/k8s/</loc>
+         <loc>https://accesspc.github.io/website-crawl-and-check/dev-build/</loc>
          <lastmod>2024-06-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://accesspc.github.io/website-crawl-and-check/security/</loc>
+         <lastmod>2024-06-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://accesspc.github.io/website-crawl-and-check/deploy/docker/</loc>
+         <lastmod>2024-06-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://accesspc.github.io/website-crawl-and-check/deploy/helm/</loc>
+         <lastmod>2024-06-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://accesspc.github.io/website-crawl-and-check/deploy/k8s/</loc>
+         <lastmod>2024-06-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://accesspc.github.io/website-crawl-and-check/dev-build/docker/</loc>
+         <lastmod>2024-06-16</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://accesspc.github.io/website-crawl-and-check/dev-build/helm/</loc>
          <lastmod>2024-06-16</lastmod>
          <changefreq>daily</changefreq>
     </url>
