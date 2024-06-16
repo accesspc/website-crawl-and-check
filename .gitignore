@@ -8,3 +8,6 @@ __pycache__
 # config
 config.json
 config.yml
+
+# mkdocs
+/site

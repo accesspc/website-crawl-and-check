@@ -1,0 +1,71 @@
+---
+
+# Site
+site_name: Website Crawl and Check
+site_description: Website Crawl and Check is a little app that crawls the website for internal links and then keeps a status track of them
+site_author: accesspc (Github Organization)
+site_url: https://accesspc.github.io/website-crawl-and-check/
+copyright: <p>&copy <a href="https://github.com/accesspc"><em>Robertas Reiciunas</em> @accesspc</a><br/><span>This project is licensed under the GPL-3.0 license.</span></p>
+
+# Project
+repo_name: website-crawl-and-check
+repo_url: https://github.com/accesspc/website-crawl-and-check
+
+docs_dir: docs/content/
+
+# mkdocs-material theme
+theme:
+  name: material
+  custom_dir: docs/overrides/
+  favicon: assets/img/wcac.svg
+  features:
+    # - content.action.edit
+    # - content.action.view
+    # - content.code.annotate
+    - content.code.copy
+    # - navigation.expand
+    # - navigation.instant
+    - navigation.tabs
+    # - navigation.top
+  icon:
+    repo: fontawesome/brands/github
+  logo: assets/img/wcac.svg
+  palette:
+    - media: '(prefers-color-scheme: dark)'
+      scheme: default
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/eye
+        name: Dark mode
+    - media: '(prefers-color-scheme: light)'
+      scheme: slate
+      primary: teal
+      accent: green
+      toggle:
+        icon: material/eye-outline
+        name: Light mode
+
+markdown_extensions:
+  - pymdownx.superfences
+  - toc:
+      anchorlink: true
+
+# Plugins
+plugins:
+  - minify:
+      minify_html: true
+
+# Navigation
+nav:
+  - Home:
+      - index.md
+  - Dev and Build:
+      - dev-build.md
+      - dev-build/docker.md
+      - dev-build/helm.md
+  - Security: security.md
+  - Deployment:
+      - deploy/docker.md
+      - deploy/k8s.md
+      - deploy/helm.md
