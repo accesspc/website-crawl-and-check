@@ -16,7 +16,7 @@ docs_dir: docs/content/
 # mkdocs-material theme
 theme:
   name: material
-  custom_dir: docs/overrides/
+  # custom_dir: docs/overrides/
   favicon: assets/img/wcac.svg
   features:
     # - content.action.edit
@@ -58,8 +58,7 @@ plugins:
 
 # Navigation
 nav:
-  - Home:
-      - index.md
+  - Home: index.md
   - Dev and Build:
       - dev-build.md
       - dev-build/docker.md
