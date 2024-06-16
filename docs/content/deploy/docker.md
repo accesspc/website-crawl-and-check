@@ -9,5 +9,5 @@ Before deploying, you need to create a configuration / config.yml file, that wil
 ```bash
 docker run -d -p 8000:8000 \
  -v $PWD/config/config.yml:/config/config.yml \
- accesspc/website-crawl-and-check:v3.0.0
+ accesspc/website-crawl-and-check:3.0.0
 ```

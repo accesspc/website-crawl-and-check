@@ -21,7 +21,7 @@ Build and push to Docker hub:
 docker buildx create --use
 
 # Build and push to docker hub
-docker buildx build --platform=linux/amd64,linux/arm64 --push -t accesspc/website-crawl-and-check:v3.0.0 .
+docker buildx build --platform=linux/amd64,linux/arm64 --push -t accesspc/website-crawl-and-check:3.0.0 .
 docker buildx build --platform=linux/amd64,linux/arm64 --push -t accesspc/website-crawl-and-check:latest .
 
 # Stop and remove build instances

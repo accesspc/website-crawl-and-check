@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: wcac
-          image: accesspc/website-crawl-and-check:v3.0.0
+          image: accesspc/website-crawl-and-check:3.0.0
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
