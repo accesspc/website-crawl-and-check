@@ -19,7 +19,7 @@ spec:
       automountServiceAccountToken: false
       containers:
         - name: {{.Release.Name | quote}}
-          image: accesspc/website-crawl-and-check:v{{.Chart.Version}}
+          image: accesspc/website-crawl-and-check:{{.Chart.Version}}
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
