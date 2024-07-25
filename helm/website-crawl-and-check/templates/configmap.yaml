@@ -2,13 +2,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{.Release.Name | quote}}
-  namespace: {{.Release.Namespace | quote}}
+  name: {{ .Release.Name | quote }}
+  namespace: {{ .Release.Namespace | quote }}
 data:
   config.yml: |
     ---
     cron:
-      seconds: {{.Values.cron.seconds}}
+      seconds: {{ .Values.cron.seconds }}
 
     email:
       msg:
@@ -21,11 +21,11 @@ data:
           h1_color: red
           status: down
       recipients:
-        {{- toYaml .Values.config.email.recipients | nindent 8}}
-      sender: {{.Values.config.email.sender}}
-      server: {{.Values.config.email.server.host}}
+        {{ - toYaml .Values.config.email.recipients | nindent 8 }}
+      sender: {{ .Values.config.email.sender }}
+      server: {{ .Values.config.email.server.host }}
 
-    {{- with .Values.config.websites}}
+    {{ - with .Values.config.websites }}
     websites:
-      {{- toYaml . | nindent 6}}
-    {{- end}}
+      {{ - toYaml . | nindent 6 }}
+    {{ - end }}

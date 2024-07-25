@@ -48,7 +48,7 @@ def route_home():
 
 @app.route('/metrics')
 def route_metrics():
-    return '\n'.join(state.getMetrics()), 200, {'Content-Type': 'text/plain; charset=utf-8'}
+    return '\n'.join(state.get_metrics()), 200, {'Content-Type': 'text/plain; charset=utf-8'}
 
 # Define scheduler job
 @scheduler.task(
@@ -77,8 +77,8 @@ def cron_job():
 
                 service.check()
 
-                u, s = service.getState()
-                state.setState(u, s)
+                u, s = service.get_state()
+                state.set_state(u, s)
 
 if __name__ == "__main__":
     if 'APP_DEBUG' in os.environ:

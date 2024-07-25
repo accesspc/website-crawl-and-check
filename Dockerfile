@@ -6,7 +6,7 @@ HEALTHCHECK --interval=5s --timeout=5s CMD ["curl", "-f", "http://localhost:8000
 RUN apt-get update \
   && apt-get -y install curl \
   && apt-get clean \
-  && apt-get purge
+  && apt-get -y purge
 
 COPY requirements.txt /requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt

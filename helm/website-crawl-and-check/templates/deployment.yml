@@ -2,24 +2,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{.Release.Name | quote}}
-  namespace: {{.Release.Namespace | quote}}
+  name: {{ .Release.Name | quote }}
+  namespace: {{ .Release.Namespace | quote }}
   labels:
-    app: {{.Release.Name | quote}}
+    app: {{ .Release.Name | quote }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{.Release.Name | quote}}
+      app: {{ .Release.Name | quote }}
   template:
     metadata:
       labels:
-        app: {{.Release.Name | quote}}
+        app: {{ .Release.Name | quote }}
     spec:
       automountServiceAccountToken: false
       containers:
-        - name: {{.Release.Name | quote}}
-          image: accesspc/website-crawl-and-check:{{.Chart.Version}}
+        - name: {{ .Release.Name | quote }}
+          image: accesspc/website-crawl-and-check:{{ .Chart.Version }}
           imagePullPolicy: Always
           livenessProbe:
             failureThreshold: 3
@@ -28,16 +28,16 @@ spec:
             successThreshold: 1
             httpGet:
               path: /
-              port: {{.Values.service.containerPort}}
+              port: {{ .Values.service.containerPort }}
               scheme: HTTP
             timeoutSeconds: 2
           ports:
-            - containerPort: {{.Values.service.containerPort}}
+            - containerPort: {{ .Values.service.containerPort }}
           readinessProbe:
             failureThreshold: 3
             httpGet:
               path: /
-              port: {{.Values.service.containerPort}}
+              port: {{ .Values.service.containerPort }}
               scheme: HTTP
             initialDelaySeconds: 5
             periodSeconds: 5
@@ -67,4 +67,4 @@ spec:
       volumes:
         - name: config
           configMap:
-            name: {{.Release.Name | quote}}
+            name: {{ .Release.Name | quote }}

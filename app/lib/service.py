@@ -32,7 +32,7 @@ class Service():
         if isinstance(value, int) and value >= 100 and value <= 599:
             self._expected_code = value
         else:
-            log.error(f'expected_code must be integer in the range of [100, 599]')
+            log.error('expected_code must be integer in the range of [100, 599]')
 
     ## Headers
     @property
@@ -44,7 +44,7 @@ class Service():
         if isinstance(value, dict):
             self._headers = value
         else:
-            log.error(f'headers must be a dict of key: value pairs')
+            log.error('headers must be a dict of key: value pairs')
 
     ## ID
     @property
@@ -75,7 +75,7 @@ class Service():
         if value in ('http', 'https'):
             self._proto = value
         else:
-            log.error(f'proto must be either http or https')
+            log.error('proto must be either http or https')
 
     ## Proxies
     @property
@@ -99,7 +99,7 @@ class Service():
         if isinstance(value, (int, float)) and value > 0 and value <= 60:
             self._timeout = value
         else:
-            log.error(f'timeout value must be float between 0 and 60')
+            log.error('timeout value must be float between 0 and 60')
 
     ## URL
     @property
@@ -114,7 +114,7 @@ class Service():
     def check(self) -> None:
 
         # Perform get request
-        response = self.requestGet()
+        response = self.request_get()
 
         # Build a state dict
         self.state = {
@@ -129,11 +129,11 @@ class Service():
         log.info(self.state)
 
     # get states
-    def getState(self) -> dict:
+    def get_state(self) -> dict:
         return self._url, self.state
 
     # requests.get
-    def requestGet(self) -> object:
+    def request_get(self) -> object:
 
         try:
             request = self.session.get(
@@ -150,19 +150,19 @@ class Service():
 
             return request
 
-        except requests.exceptions.HTTPError as errh:
-            log.error('Http Error:', errh)
+        except requests.exceptions.HTTPError as ex:
+            log.error(f'Http Error: {ex}')
             log.error(self.url)
-        except requests.exceptions.ConnectionError as errc:
-            log.error('Error Connecting:', errc)
-        except requests.exceptions._timeout as errt:
-            log.error('Timeout Error:', errt)
-        except requests.exceptions.RequestException as err:
-            log.error('OOps: Something Else', err)
+        except requests.exceptions.ConnectionError as ex:
+            log.error(f'Error Connecting: {ex}')
+        except requests.exceptions._timeout as ex:
+            log.error(f'Timeout Error: {ex}')
+        except requests.exceptions.RequestException as ex:
+            log.error(f'OOps: Something Else {ex}')
         return False
 
     # requests.post
-    def requestPost(self, data={}, json={}) -> object:
+    def request_post(self, data={}, json={}) -> object:
 
         try:
             request = self.session.post(
@@ -181,12 +181,12 @@ class Service():
 
             return request
 
-        except requests.exceptions.HTTPError as errh:
-            log.error('Http Error:', errh)
-        except requests.exceptions.ConnectionError as errc:
-            log.error('Error Connecting:', errc)
-        except requests.exceptions._timeout as errt:
-            log.error('Timeout Error:', errt)
-        except requests.exceptions.RequestException as err:
-            log.error('OOps: Something Else', err)
+        except requests.exceptions.HTTPError as ex:
+            log.error(f'Http Error: {ex}')
+        except requests.exceptions.ConnectionError as ex:
+            log.error(f'Error Connecting: {ex}')
+        except requests.exceptions._timeout as ex:
+            log.error(f'Timeout Error: {ex}')
+        except requests.exceptions.RequestException as ex:
+            log.error(f'OOps: Something Else: {ex}')
         return False

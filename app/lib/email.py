@@ -65,13 +65,13 @@ class Email():
         log.info('Message sent')
         return 'Message sent'
 
-    def sendOk(self, web) -> str:
+    def send_ok(self, web) -> str:
 
         self.msg = self.msgs['ok']
 
         return self.__send(web)
 
-    def sendWarn(self, web) -> str:
+    def send_warn(self, web) -> str:
 
         self.msg = self.msgs['warn']
 

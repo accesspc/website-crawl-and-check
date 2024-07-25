@@ -19,7 +19,7 @@ class State():
         log.error('Can not set states directly')
 
     # Get metrics
-    def getMetrics(self) -> list:
+    def get_metrics(self) -> list:
         metrics = []
         metrics.append('# HELP wcac_response_code An HTTP response code')
         metrics.append('# TYPE wcac_response_code summary')
@@ -63,5 +63,5 @@ class State():
         return metrics
 
     # Set a state
-    def setState(self, url, state) -> None:
+    def set_state(self, url, state) -> None:
         self.states[url] = state
