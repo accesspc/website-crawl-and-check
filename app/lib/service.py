@@ -87,7 +87,7 @@ class Service():
         if isinstance(value, dict):
             self._proxies = value
         else:
-            log.error(f'proxies must be a dict of key: value pairs')
+            log.error('proxies must be a dict of key: value pairs')
 
     ## Timeout
     @property
@@ -129,7 +129,7 @@ class Service():
         log.info(self.state)
 
     # get states
-    def get_state(self) -> dict:
+    def get_state(self) -> tuple:
         return self._url, self.state
 
     # requests.get
