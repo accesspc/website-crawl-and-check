@@ -1,3 +1,6 @@
+# sonar scanner
+.scannerwork
+
 # Python
 __pycache__
 .pyenv
