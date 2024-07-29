@@ -4,6 +4,7 @@ import sys
 
 from flask import Flask, render_template
 from flask_apscheduler import APScheduler
+from flask_wtf import CSRFProtect
 from waitress import serve
 
 from lib.config import Config
@@ -34,6 +35,8 @@ state = State()
 
 # Create app
 app = Flask(__name__)
+csrf = CSRFProtect()
+csrf.init_app(app)
 
 # Create scheduler
 scheduler = APScheduler()
