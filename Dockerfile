@@ -4,7 +4,7 @@ EXPOSE 8000
 HEALTHCHECK --interval=5s --timeout=5s CMD ["curl", "-f", "http://localhost:8000", "||", "exit", "1"]
 
 RUN apt-get update \
-  && apt-get -y install curl \
+  && apt-get -y --no-install-recommends install curl \
   && apt-get clean \
   && apt-get -y purge
 
